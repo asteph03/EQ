@@ -196,7 +196,7 @@ juce::String RotarySliderWithLabels::getDisplayString() const
         
         if( val > 999.f )
         {
-            val /= 1000.f; //1001 / 1000 = 1.001
+            val /= 1000.f;
             addK = true;
         }
         
@@ -204,7 +204,7 @@ juce::String RotarySliderWithLabels::getDisplayString() const
     }
     else
     {
-        jassertfalse; //this shouldn't happen!
+        jassertfalse;
     }
     
     if( suffix.isNotEmpty() )
@@ -316,7 +316,6 @@ void ResponseCurveComponent::updateResponseCurve()
 void ResponseCurveComponent::paint (juce::Graphics& g)
 {
     using namespace juce;
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (Colours::black);
 
     drawBackgroundGrid(g);
@@ -328,7 +327,7 @@ void ResponseCurveComponent::paint (juce::Graphics& g)
         auto leftChannelFFTPath = leftPathProducer.getPath();
         leftChannelFFTPath.applyTransform(AffineTransform().translation(responseArea.getX(), responseArea.getY()));
         
-        g.setColour(Colour(146u, 49u, 176u)); //purple-
+        g.setColour(Colour(146u, 49u, 176u));
         g.strokePath(leftChannelFFTPath, PathStrokeType(1.f));
         
         auto rightChannelFFTPath = rightPathProducer.getPath();
@@ -741,7 +740,7 @@ void SimpleEQAudioProcessorEditor::paint(juce::Graphics &g)
     auto bounds = getLocalBounds();
     auto center = bounds.getCentre();
     
-    g.setFont(Font("Iosevka Term Slab", 30, 0)); //https://github.com/be5invis/Iosevka
+    g.setFont(Font("Iosevka Term Slab", 30, 0));
     
     auto cornerSize = 20;
     auto curvePos = curve.getCurrentPosition();
@@ -786,7 +785,7 @@ void SimpleEQAudioProcessorEditor::resized()
     bounds.removeFromTop(5);
     
     float hRatio = 25.f / 100.f; //JUCE_LIVE_CONSTANT(25) / 100.f;
-    auto responseArea = bounds.removeFromTop(bounds.getHeight() * hRatio); //change from 0.33 to 0.25 because I needed peak hz text to not overlap the slider thumb
+    auto responseArea = bounds.removeFromTop(bounds.getHeight() * hRatio);
 
     responseCurveComponent.setBounds(responseArea);
     

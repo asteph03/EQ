@@ -91,9 +91,6 @@ private:
 template<typename PathType>
 struct AnalyzerPathGenerator
 {
-    /*
-     converts 'renderData[]' into a juce::Path
-     */
     void generatePath(const std::vector<float>& renderData,
                       juce::Rectangle<float> fftBounds,
                       int fftSize,
@@ -118,19 +115,16 @@ struct AnalyzerPathGenerator
 
         auto y = map(renderData[0]);
 
-//        jassert( !std::isnan(y) && !std::isinf(y) );
         if( std::isnan(y) || std::isinf(y) )
             y = bottom;
         
         p.startNewSubPath(0, y);
 
-        const int pathResolution = 2; //you can draw line-to's every 'pathResolution' pixels.
+        const int pathResolution = 2;
 
         for( int binNum = 1; binNum < numBins; binNum += pathResolution )
         {
             y = map(renderData[binNum]);
-
-//            jassert( !std::isnan(y) && !std::isinf(y) );
 
             if( !std::isnan(y) && !std::isinf(y) )
             {
@@ -316,8 +310,6 @@ public:
     void resized() override;
 
 private:
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it.
     SimpleEQAudioProcessor& audioProcessor;
 
     
